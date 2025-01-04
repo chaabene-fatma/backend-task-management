@@ -1,4 +1,4 @@
-package com.example.backendtaskmanagement.models;
+package com.example.backendtaskmanagement.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

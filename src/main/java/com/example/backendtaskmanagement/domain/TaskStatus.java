@@ -1,4 +1,4 @@
-package com.example.backendtaskmanagement.models;
+package com.example.backendtaskmanagement.domain;
 
 public enum TaskStatus {
     PENDING,

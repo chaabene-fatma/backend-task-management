@@ -1,6 +1,6 @@
 package com.example.backendtaskmanagement.repositories;
 
-import com.example.backendtaskmanagement.models.User;
+import com.example.backendtaskmanagement.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

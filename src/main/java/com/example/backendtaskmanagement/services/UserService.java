@@ -1,8 +1,8 @@
 package com.example.backendtaskmanagement.services;
 
 import com.example.backendtaskmanagement.exceptions.UserAlreadyExistsException;
-import com.example.backendtaskmanagement.models.Role;
-import com.example.backendtaskmanagement.models.User;
+import com.example.backendtaskmanagement.domain.Role;
+import com.example.backendtaskmanagement.domain.User;
 import com.example.backendtaskmanagement.repositories.RoleRepository;
 import com.example.backendtaskmanagement.repositories.UserRepository;
 import jakarta.servlet.http.Cookie;

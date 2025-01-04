@@ -1,7 +1,7 @@
 package com.example.backendtaskmanagement.services;
 
-import com.example.backendtaskmanagement.models.Role;
-import com.example.backendtaskmanagement.models.User;
+import com.example.backendtaskmanagement.domain.Role;
+import com.example.backendtaskmanagement.domain.User;
 import com.example.backendtaskmanagement.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
