@@ -17,8 +17,8 @@ FROM openjdk:21-jdk-slim
 # Set working directory
 WORKDIR /app
 
-# Copy the built JAR file
-COPY target/backend-task-management-0.0.1-SNAPSHOT.jar app.jar
+# Copy the built JAR file from the builder stage
+COPY --from=builder /app/target/backend-task-management-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port Spring Boot runs on
 EXPOSE 8080
