@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers(AUTH_WHITELIST).permitAll()
+                                .requestMatchers("/actuator/**").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/tasks/**").authenticated()
                                 .anyRequest().authenticated()
