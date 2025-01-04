@@ -1,4 +1,4 @@
-package com.example.backendtaskmanagement.security.filter;
+package com.example.backendtaskmanagement.security;
 
 import com.example.backendtaskmanagement.services.JwtService;
 import com.example.backendtaskmanagement.services.UserDetailsServiceImpl;

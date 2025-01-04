@@ -1,6 +1,5 @@
-package com.example.backendtaskmanagement.security.config;
+package com.example.backendtaskmanagement.security;
 
-import com.example.backendtaskmanagement.security.filter.JwtAuthenticationFilter;
 import com.example.backendtaskmanagement.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
