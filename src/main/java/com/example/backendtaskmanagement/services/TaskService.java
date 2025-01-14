@@ -1,6 +1,5 @@
 package com.example.backendtaskmanagement.services;
 
-import com.example.backendtaskmanagement.commons.RequiresAuthentication;
 import com.example.backendtaskmanagement.exceptions.InvalidTaskStatusException;
 import com.example.backendtaskmanagement.exceptions.ResourceNotFoundException;
 import com.example.backendtaskmanagement.domain.Task;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiresAuthentication
 public class TaskService {
     private final TaskRepository taskRepository;
 
@@ -21,13 +19,11 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    @RequiresAuthentication
     public Task createTask(Task task, User authenticatedUser) {
         task.setUser(authenticatedUser);
         return taskRepository.save(task);
     }
 
-    @RequiresAuthentication
     public Optional<Task> updateTask(Long id, Task updatedTask) {
         return taskRepository.findById(id).map(task -> {
             task.setTitle(updatedTask.getTitle());
@@ -38,7 +34,6 @@ public class TaskService {
         });
     }
 
-    @RequiresAuthentication
     public boolean deleteTask(Long id) {
         if (!taskRepository.existsById(id)) {
             throw new ResourceNotFoundException("Task with id " + id + " not found");
@@ -47,7 +42,6 @@ public class TaskService {
         return true;
     }
 
-    @RequiresAuthentication
     public List<Task> filterTasksByStatus(User authenticatedUser, TaskStatus status) {
         if (status == null) {
             throw new InvalidTaskStatusException("Invalid task status provided");
@@ -55,17 +49,14 @@ public class TaskService {
         return taskRepository.findByUserIdAndStatus(authenticatedUser.getId(), status);
     }
 
-    @RequiresAuthentication
     public List<Task> searchTasks(User authenticatedUser, String keyword) {
         return taskRepository.searchTasks(authenticatedUser.getId(), keyword, keyword);
     }
 
-    @RequiresAuthentication
     public List<Task> getTasksForAuthenticatedUser(User authenticatedUser) {
         return taskRepository.findByUserId(authenticatedUser.getId());
     }
 
-    @RequiresAuthentication
     public Task getTaskById(Long taskId, User authenticatedUser) {
         return taskRepository.findById(taskId)
                 .filter(task -> task.getUser().getId().equals(authenticatedUser.getId()))
