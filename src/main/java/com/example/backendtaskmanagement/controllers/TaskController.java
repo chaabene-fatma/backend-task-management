@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tasks")
-@RequiresAuthentication
 public class TaskController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
@@ -34,7 +33,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO, @RequiresAuthentication User authenticatedUser) {
+    @RequiresAuthentication
+    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO, User authenticatedUser) {
         LOGGER.info("Creating task with title: {}", taskDTO.title());
         try {
             Task task = taskService.createTask(taskMapper.mapToEntity(taskDTO), authenticatedUser);
@@ -46,6 +46,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
+    @RequiresAuthentication
     public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         LOGGER.info("Update task with ID: {}", id);
         return taskService.updateTask(id, taskMapper.mapToEntity(taskDTO))
@@ -60,7 +61,8 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id, @RequiresAuthentication User authenticatedUser) {
+    @RequiresAuthentication
+    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id, User authenticatedUser) {
         Task task = taskService.getTaskById(id, authenticatedUser);
         LOGGER.info("Fetch Task successfully with ID: {}", id);
         return ResponseEntity.ok(taskMapper.mapToDTO(task));
@@ -83,7 +85,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskDTO>> getAllTasks(@RequiresAuthentication User authenticatedUser) {
+    @RequiresAuthentication
+    public ResponseEntity<List<TaskDTO>> getAllTasks(User authenticatedUser) {
         List<Task> tasks = taskService.getTasksForAuthenticatedUser(authenticatedUser);
         List<TaskDTO> taskDTOs = tasks.stream()
                 .map(taskMapper::mapToDTO)
@@ -93,7 +96,8 @@ public class TaskController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<List<TaskDTO>> filterTasks(@RequestParam TaskStatus status, @RequiresAuthentication User authenticatedUser) {
+    @RequiresAuthentication
+    public ResponseEntity<List<TaskDTO>> filterTasks(@RequestParam TaskStatus status, User authenticatedUser) {
         LOGGER.info("Filtering tasks with status: {}", status);
         List<Task> tasks = taskService.filterTasksByStatus(authenticatedUser, status);
         List<TaskDTO> taskDTOs = tasks.stream()
@@ -104,7 +108,8 @@ public class TaskController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<TaskDTO>> searchTasks(@RequestParam String keyword, @RequiresAuthentication User authenticatedUser) {
+    @RequiresAuthentication
+    public ResponseEntity<List<TaskDTO>> searchTasks(@RequestParam String keyword, User authenticatedUser) {
         LOGGER.info("Searching tasks with keyword: {}", keyword);
         List<Task> tasks = taskService.searchTasks(authenticatedUser, keyword);
         List<TaskDTO> taskDTOs = tasks.stream()
